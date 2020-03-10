@@ -7,7 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3FC9084B23C8379500434A64 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9084A23C8379500434A64 /* GameManager.swift */; };
+		3FC9084D23CE554300434A64 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC9084C23CE554300434A64 /* Player.swift */; };
 		3FE31DAD23C32483008DBFBC /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE31DAC23C32483008DBFBC /* main.swift */; };
+		3FE31DB423C324B0008DBFBC /* Warrior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE31DB323C324B0008DBFBC /* Warrior.swift */; };
+		3FEA4CA923D76DBB0007060D /* Mage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEA4CA823D76DBB0007060D /* Mage.swift */; };
+		3FEA4CAB23D76E1D0007060D /* Knight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEA4CAA23D76E1D0007060D /* Knight.swift */; };
+		3FEA4CAD23D7740B0007060D /* Archer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEA4CAC23D7740B0007060D /* Archer.swift */; };
+		3FEA4CAF23D7753B0007060D /* Hobbit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEA4CAE23D7753B0007060D /* Hobbit.swift */; };
+		3FEA4CB123D776200007060D /* Cavalier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEA4CB023D776200007060D /* Cavalier.swift */; };
+		3FEA4CB323D7769D0007060D /* Werewolf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEA4CB223D7769D0007060D /* Werewolf.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +32,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3FC9084A23C8379500434A64 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		3FC9084C23CE554300434A64 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		3FE31DA923C32483008DBFBC /* warrior */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = warrior; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE31DAC23C32483008DBFBC /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		3FE31DB323C324B0008DBFBC /* Warrior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Warrior.swift; sourceTree = "<group>"; };
+		3FEA4CA823D76DBB0007060D /* Mage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mage.swift; sourceTree = "<group>"; };
+		3FEA4CAA23D76E1D0007060D /* Knight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knight.swift; sourceTree = "<group>"; };
+		3FEA4CAC23D7740B0007060D /* Archer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Archer.swift; sourceTree = "<group>"; };
+		3FEA4CAE23D7753B0007060D /* Hobbit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hobbit.swift; sourceTree = "<group>"; };
+		3FEA4CB023D776200007060D /* Cavalier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cavalier.swift; sourceTree = "<group>"; };
+		3FEA4CB223D7769D0007060D /* Werewolf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Werewolf.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +76,33 @@
 			isa = PBXGroup;
 			children = (
 				3FE31DAC23C32483008DBFBC /* main.swift */,
+				3FC9084A23C8379500434A64 /* GameManager.swift */,
+				3FC9084C23CE554300434A64 /* Player.swift */,
+				3FEA4CB423D785D20007060D /* Warriors */,
 			);
 			path = warrior;
+			sourceTree = "<group>";
+		};
+		3FEA4CB423D785D20007060D /* Warriors */ = {
+			isa = PBXGroup;
+			children = (
+				3FE31DB323C324B0008DBFBC /* Warrior.swift */,
+				3FEA4CB523D785FC0007060D /* Subclasses */,
+			);
+			path = Warriors;
+			sourceTree = "<group>";
+		};
+		3FEA4CB523D785FC0007060D /* Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				3FEA4CA823D76DBB0007060D /* Mage.swift */,
+				3FEA4CAA23D76E1D0007060D /* Knight.swift */,
+				3FEA4CAC23D7740B0007060D /* Archer.swift */,
+				3FEA4CAE23D7753B0007060D /* Hobbit.swift */,
+				3FEA4CB023D776200007060D /* Cavalier.swift */,
+				3FEA4CB223D7769D0007060D /* Werewolf.swift */,
+			);
+			path = Subclasses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,7 +163,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FEA4CA923D76DBB0007060D /* Mage.swift in Sources */,
+				3FC9084D23CE554300434A64 /* Player.swift in Sources */,
 				3FE31DAD23C32483008DBFBC /* main.swift in Sources */,
+				3FEA4CB123D776200007060D /* Cavalier.swift in Sources */,
+				3FEA4CB323D7769D0007060D /* Werewolf.swift in Sources */,
+				3FC9084B23C8379500434A64 /* GameManager.swift in Sources */,
+				3FEA4CAB23D76E1D0007060D /* Knight.swift in Sources */,
+				3FEA4CAD23D7740B0007060D /* Archer.swift in Sources */,
+				3FE31DB423C324B0008DBFBC /* Warrior.swift in Sources */,
+				3FEA4CAF23D7753B0007060D /* Hobbit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
