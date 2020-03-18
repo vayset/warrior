@@ -11,6 +11,6 @@ import Foundation
 
 class Werewolf : Warrior {
     init(id: Int, name: String) {
-        super.init(id: id, name: name, healthPointsMax: 250, attackPoints: 60)
+        super.init(id: id, name: name, healthPointsMax: 250, attackPoints: 60, magicPoints: 30)
     }
 }

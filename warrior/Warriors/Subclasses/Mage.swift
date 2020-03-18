@@ -9,5 +9,7 @@
 import Foundation
 
 class Mage : Warrior {
-
+    init(id: Int, name: String) {
+        super.init(id: id, name: name, healthPointsMax: 200, attackPoints: 40, magicPoints: 90)
+    }
 }

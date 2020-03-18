@@ -58,8 +58,9 @@ class Player {
         var warriorSelected: Warrior? = nil
         
         repeat {
+            print()
             print("Select a class for your warrior by entering the corresponding integer (1-5):")
-            print("1 => Knight,2 => Archer, 3 => Hobbit, 4 => Cavalier, 5 => Werewolf")
+            print("⚔️ Knight ⚔️,2 => 🏹 Archer 🏹, 3 => 👽 Hobbit 👽, 4 => 🐎 Cavalier 🐎, 5 => 🐺 Werewolf 🐺")
             let warriorTypeIndex = getTerminalEntry()
             warriorSelected = getWarriorAccordingToTypeIndex(index: warriorTypeIndex, id: id, warriorName: warriorName)
         } while warriorSelected == nil
@@ -110,18 +111,50 @@ class Player {
     /// Se
     func playTurn(opponent: Player) {
         
-        print("Player \(id) c'est votre tour !")
-        describeWarriors()
-        let warriorMakingAction = pickWarrior(from: self)
+        let warriorMakingAction: Warrior = pickWarrior(from: self)
         print("Le guerrier attaquant Vous avez choisi \(warriorMakingAction.name)")
         
         print()
         
-        print("VOUS Allez attaquer un aure guerrier ⚔")
-        let victimWarrior = pickWarrior(from: opponent)
-        print("Le guerrier subissant Vous avez choisi \(victimWarrior.name)")
         
-        warriorMakingAction.attack(warrior: victimWarrior)
+        print("Choisissez une action")
+        print("1. Attack")
+        print("2. Soigner")
+        
+        var acftionPerformedSucessfuly = false
+        
+        
+        while !acftionPerformedSucessfuly {
+            if let choiceInput = readLine() {
+                switch choiceInput {
+                case "1":
+                    print("Choissisez le guerrier adverse que vous voudriez attaquer")
+                    print()
+                    let victimWarrior = pickWarrior(from: opponent)
+                    print("Le guerrier subissant Vous avez choisi \(victimWarrior.name)")
+                    warriorMakingAction.attack(victimWarrior: victimWarrior)
+                    acftionPerformedSucessfuly = true
+                case "2":
+                    print("Choissisez le guerrier adverse que vous voudriez attaquer")
+                    print()
+                    let healedWarrior = pickWarrior(from: self)
+                    print("Le guerrier étant soigné Vous avez choisi \(healedWarrior.name)")
+                    warriorMakingAction.heal(warrior: healedWarrior)
+                    acftionPerformedSucessfuly = true
+                default: break
+                }
+                
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+//        warriorMakingAction.attack(warrior: victimWarrior)
         
         
         // CHoisi un guerrier
@@ -141,8 +174,9 @@ class Player {
         var pickedWarrior: Warrior?
         
         while pickedWarrior == nil {
-            
-            print("Player\(id) Choisi ton gurrier entre 1 et 3")
+            print()
+            print("Player\(id) Choisi ton gurrier  d'attaque entre 1 et 3")
+            print()
             opponent.describeWarriors()
             
             pickedWarrior = askPlayerToChooseWarrior(from: opponent.warriors)
@@ -177,7 +211,14 @@ class Player {
             return nil
         }
         
-        return warriors[inputChoix - 1]
+        let pickedWarrior = warriors[inputChoix - 1]
+        
+        guard pickedWarrior.isAlive else {
+            print("☠️ Veuillez choisir un guerrier vivant ")
+            return nil
+        }
+        
+        return pickedWarrior
     }
     
     
