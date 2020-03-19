@@ -14,7 +14,6 @@
 // un nom (warrior.name)
 // différent de tous les autres personnages déjà créés dans le jeu (checkNameValidity(name: String, warriors: [warriors])).
 
-
 import Foundation
 
 
@@ -25,6 +24,7 @@ class Player {
     init(id: Int) {
         self.id = id
     }
+
     
     let numberOfWarriorPerTeam = 3
     
@@ -60,7 +60,7 @@ class Player {
         repeat {
             print()
             print("Select a class for your warrior by entering the corresponding integer (1-5):")
-            print("⚔️ Knight ⚔️,2 => 🏹 Archer 🏹, 3 => 👽 Hobbit 👽, 4 => 🐎 Cavalier 🐎, 5 => 🐺 Werewolf 🐺")
+            print("⚔️(1)Knight⚔️,🏹(2)Archer🏹,👽(3)Hobbit👽,🐎(4)Cavalier🐎,🐺(5)Werewolf🐺")
             let warriorTypeIndex = getTerminalEntry()
             warriorSelected = getWarriorAccordingToTypeIndex(index: warriorTypeIndex, id: id, warriorName: warriorName)
         } while warriorSelected == nil
@@ -109,51 +109,62 @@ class Player {
     }
     
     /// Se
+    
+    
+    private func performAttack(opponent: Player, warriorMakingAction: Warrior) {
+        print("Choissisez le guerrier adverse que vous voudriez attaquer")
+        print()
+        let victimWarrior = pickWarrior(from: opponent)
+        print("Le guerrier subissant Vous avez choisi \(victimWarrior.name)")
+        warriorMakingAction.attack(victimWarrior: victimWarrior)
+    }
+    
+    private func performHeal(warriorMakingAction: Warrior) {
+        print()
+        print("Choissisez le guerrier adverse que vous voudriez attaquer")
+        print()
+        let healedWarrior = pickWarrior(from: self)
+        print("Le guerrier étant soigné Vous avez choisi \(healedWarrior.name)")
+        warriorMakingAction.heal(warrior: healedWarrior)
+    }
+    
+    enum WarriorAction {
+        case Attack, Heal
+    }
+    
+    private func askPlayerWarriorAction() -> WarriorAction {
+        print("Choisissez une action")
+         print("1. Attack")
+         print("2. Soigner")
+         
+         while true {
+             
+             if let choiceInput = readLine() {
+                 switch choiceInput {
+                 case "1": return .Attack
+                     
+                 case "2": return .Heal
+                    
+                 default: print("Error please enter a number between 1 and 2")
+                 }
+    
+             }
+         }
+    }
+
     func playTurn(opponent: Player) {
         
-        let warriorMakingAction: Warrior = pickWarrior(from: self)
-        print("Le guerrier attaquant Vous avez choisi \(warriorMakingAction.name)")
+        let warriorMakingAction = pickWarrior(from: self)
+        let warriorAction = askPlayerWarriorAction()
+
         
-        print()
-        
-        
-        print("Choisissez une action")
-        print("1. Attack")
-        print("2. Soigner")
-        
-        var acftionPerformedSucessfuly = false
-        
-        
-        while !acftionPerformedSucessfuly {
-            if let choiceInput = readLine() {
-                switch choiceInput {
-                case "1":
-                    print("Choissisez le guerrier adverse que vous voudriez attaquer")
-                    print()
-                    let victimWarrior = pickWarrior(from: opponent)
-                    print("Le guerrier subissant Vous avez choisi \(victimWarrior.name)")
-                    warriorMakingAction.attack(victimWarrior: victimWarrior)
-                    acftionPerformedSucessfuly = true
-                case "2":
-                    print("Choissisez le guerrier adverse que vous voudriez attaquer")
-                    print()
-                    let healedWarrior = pickWarrior(from: self)
-                    print("Le guerrier étant soigné Vous avez choisi \(healedWarrior.name)")
-                    warriorMakingAction.heal(warrior: healedWarrior)
-                    acftionPerformedSucessfuly = true
-                default: break
-                }
-                
-            }
+        switch warriorAction {
+        case .Attack: performAttack(opponent: opponent, warriorMakingAction: warriorMakingAction)
+        case .Heal: performHeal(warriorMakingAction: warriorMakingAction)
         }
+
         
-        
-        
-        
-        
-        
-        
-        
+
 //        warriorMakingAction.attack(warrior: victimWarrior)
         
         
@@ -166,7 +177,7 @@ class Player {
         // Si c'est un soin il faut choisir un autre guerrier de sa propre équipe
         
     }
-    
+
     func pickWarrior(from opponent: Player) -> Warrior {
         
         
@@ -223,4 +234,3 @@ class Player {
     
     
 }
-
