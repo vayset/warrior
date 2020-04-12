@@ -60,7 +60,7 @@ class GameManager {
         let player = Player(id: id)
         players.append(player)
     }
-    /// dans la function startTeamCreationPhase on voit une boucle for dans cette boucle on creer player dans players et chaque tour de boucle (normalement 3) il va executer la methode createWarriors(c'est a dire creer le warrior 3 fois bien sur avec id different )
+  
     private func startTeamCreationPhase() {
         for player in players {
             player.createWarriors()

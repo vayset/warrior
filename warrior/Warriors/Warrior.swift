@@ -42,7 +42,7 @@ class Warrior {
             victimWarrior.healthPointsCurrent = 0
         }
     
-        print("LLes points de vies de la victime et désormais \(victimWarrior.healthPointsCurrent)")
+        print("Les points de vies de la victime et désormais \(victimWarrior.healthPointsCurrent)")
     }
     
     func heal(warrior: Warrior) {

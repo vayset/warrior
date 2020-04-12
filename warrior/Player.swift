@@ -26,7 +26,7 @@ class Player {
     }
 
     
-    let numberOfWarriorPerTeam = 3
+    private let numberOfWarriorPerTeam = 3
     
     var warriors: [Warrior] = []
     
@@ -39,7 +39,7 @@ class Player {
         
         return false
     }
-    /// dans la func createWarriors on voit d'abord un print vide qui permet de faire un retour à la ligne,apres un print qui va afficher le message: Player x (le id va afficher numerau atribuer au player) c'est toi de choisir tes guerriers, et encore un print vide pour retour a la ligne.   Apres on retrouve une boucle for dans quelle on va creer warriorId et dedans on boucle de 1 jusque a numberOfWarriorPerTeam ( c'est a dire 3 car numberOfWarriorPerTeam et une constante qu'on a definie plus haut avec INT 3) et chaque tour de boucle il va afficher : svp entrer le nom de votre warrior 1,2,3. (d'apres ce que j'ai compris warriorId et similaire a index qui recupere le nombre de tour de boucle) et aussi chaque tour de boucle il va exicuter createWarrior(id: warriorId) qui veut dire creer le warrior, le id: warriorId veut dire que id possede les valeur de warriorId c'est a dire 1,2,3, et pour finir on retrouve describeWarriors() permet d'afficher description des warriors
+   
     func createWarriors() {
         print()
         print("Player \(id) it is your turn to pick your warriors !")
@@ -51,7 +51,7 @@ class Player {
         }
         
     }
-    /// dans la function createWarrior on voit d'abord le parametre id qui permet d'avoir un id warrior grace a warriorId de la function precedente, apres on voit une constante warriorName qui a pour valeur getTerminalEntry() qui permet de entrer le name de warrior a chaque appel, apres on voit une variable warriorSelected qui a pour type la classe Warrior? qui permet de recuperer les warrior de ces sous classe c'est a dire plus bas selon le index indiquer il va passer par classe Warrior et ensuite ces sous classe, apres on retrouve un type de boucle repeat qui contient 2 print avec indication de chaque index relier a des warriors, apres on retrouve une constante warriorTypeIndex qui pour but de recuperer un numero pour index, et apres on retrouve warriorSelected qui contient getWarriorAccordingToTypeIndex et qui va nous donner selon le index saisi le warrior correspondant,
+    
     private func createWarrior(id: Int) {
         let warriorName = getTerminalEntry()
         
@@ -60,7 +60,7 @@ class Player {
         repeat {
             print()
             print("Select a class for your warrior by entering the corresponding integer (1-5):")
-            print("⚔️(1)Knight⚔️,🏹(2)Archer🏹,👽(3)Hobbit👽,🐎(4)Cavalier🐎,🐺(5)Werewolf🐺")
+            print("⚔️(1)Knight⚔️  🏹(2)Archer🏹  👽(3)Hobbit👽  🐎(4)Cavalier🐎  🐺(5)Werewolf🐺")
             let warriorTypeIndex = getTerminalEntry()
             warriorSelected = getWarriorAccordingToTypeIndex(index: warriorTypeIndex, id: id, warriorName: warriorName)
         } while warriorSelected == nil
@@ -112,6 +112,7 @@ class Player {
     
     
     private func performAttack(opponent: Player, warriorMakingAction: Warrior) {
+        print()
         print("Choissisez le guerrier adverse que vous voudriez attaquer")
         print()
         let victimWarrior = pickWarrior(from: opponent)
@@ -121,7 +122,7 @@ class Player {
     
     private func performHeal(warriorMakingAction: Warrior) {
         print()
-        print("Choissisez le guerrier adverse que vous voudriez attaquer")
+        print("Choissisez le guerrier adverse que vous voudriez soigner")
         print()
         let healedWarrior = pickWarrior(from: self)
         print("Le guerrier étant soigné Vous avez choisi \(healedWarrior.name)")
@@ -133,10 +134,11 @@ class Player {
     }
     
     private func askPlayerWarriorAction() -> WarriorAction {
-        print("Choisissez une action")
+         print()
+         print("Choisissez une action")
          print("1. Attack")
          print("2. Soigner")
-         
+         print()
          while true {
              
              if let choiceInput = readLine() {
@@ -153,11 +155,12 @@ class Player {
     }
 
     func playTurn(opponent: Player) {
-        
+        print()
+        print("Player\(id) Choisi ton gurrier  d'attaque entre 1 et 3")
+        print()
         let warriorMakingAction = pickWarrior(from: self)
         let warriorAction = askPlayerWarriorAction()
 
-        
         switch warriorAction {
         case .Attack: performAttack(opponent: opponent, warriorMakingAction: warriorMakingAction)
         case .Heal: performHeal(warriorMakingAction: warriorMakingAction)
@@ -185,9 +188,9 @@ class Player {
         var pickedWarrior: Warrior?
         
         while pickedWarrior == nil {
-            print()
-            print("Player\(id) Choisi ton gurrier  d'attaque entre 1 et 3")
-            print()
+//            print()
+//            print("Player\(id) Choisi ton gurrier  d'attaque entre 1 et 3")
+//            print()
             opponent.describeWarriors()
             
             pickedWarrior = askPlayerToChooseWarrior(from: opponent.warriors)
