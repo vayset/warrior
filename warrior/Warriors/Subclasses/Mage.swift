@@ -8,8 +8,9 @@
 
 import Foundation
 
-class Mage : Warrior {
+class Mage: Warrior {
+    
     init(id: Int, name: String) {
-        super.init(id: id, name: name, healthPointsMax: 200, attackPoints: 40, magicPoints: 90)
+        super.init(id: id, name: name, healthPointsMax: 200, baseAttackPoints: 20, magicPoints: 90, weapon: Dirk())
     }
 }

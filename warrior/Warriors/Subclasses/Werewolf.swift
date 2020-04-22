@@ -9,8 +9,10 @@
 import Foundation
 
 
-class Werewolf : Warrior {
+class Werewolf: Warrior {
     init(id: Int, name: String) {
-        super.init(id: id, name: name, healthPointsMax: 250, attackPoints: 60, magicPoints: 30)
+        super.init(id: id, name: name, healthPointsMax: 250, baseAttackPoints: 30, magicPoints: 30, weapon: Mace())
     }
+
+
 }

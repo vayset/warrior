@@ -24,7 +24,7 @@ class Player {
     init(id: Int) {
         self.id = id
     }
-
+    
     
     private let numberOfWarriorPerTeam = 3
     
@@ -39,12 +39,12 @@ class Player {
         
         return false
     }
-   
+    
     func createWarriors() {
         print()
         print("Player \(id) it is your turn to pick your warriors !")
         print()
-    
+        
         for warriorId in 1...numberOfWarriorPerTeam {
             print("Please enter the name of your warrior \(warriorId)")
             createWarrior(id: warriorId)
@@ -134,26 +134,26 @@ class Player {
     }
     
     private func askPlayerWarriorAction() -> WarriorAction {
-         print()
-         print("Choisissez une action")
-         print("1. Attack")
-         print("2. Soigner")
-         print()
-         while true {
-             
-             if let choiceInput = readLine() {
-                 switch choiceInput {
-                 case "1": return .Attack
-                     
-                 case "2": return .Heal
+        print()
+        print("Choisissez une action")
+        print("1. Attack")
+        print("2. Soigner")
+        print()
+        while true {
+            
+            if let choiceInput = readLine() {
+                switch choiceInput {
+                case "1": return .Attack
                     
-                 default: print("Error please enter a number between 1 and 2")
-                 }
-    
-             }
-         }
+                case "2": return .Heal
+                    
+                default: print("Error please enter a number between 1 and 2")
+                }
+                
+            }
+        }
     }
-
+    
     func playTurn(opponent: Player) {
         print()
         print("Player\(id) Choisi ton gurrier  d'attaque entre 1 et 3")
@@ -161,14 +161,14 @@ class Player {
         let warriorMakingAction = pickWarrior(from: self)
         let warriorAction = askPlayerWarriorAction()
 
-        switch warriorAction {
-        case .Attack: performAttack(opponent: opponent, warriorMakingAction: warriorMakingAction)
-        case .Heal: performHeal(warriorMakingAction: warriorMakingAction)
-        }
+            switch warriorAction {
+            case .Attack: performAttack(opponent: opponent, warriorMakingAction: warriorMakingAction)
+            case .Heal: performHeal(warriorMakingAction: warriorMakingAction)
+            }
+            
 
         
-
-//        warriorMakingAction.attack(warrior: victimWarrior)
+        //        warriorMakingAction.attack(warrior: victimWarrior)
         
         
         // CHoisi un guerrier
@@ -180,7 +180,7 @@ class Player {
         // Si c'est un soin il faut choisir un autre guerrier de sa propre équipe
         
     }
-
+    
     func pickWarrior(from opponent: Player) -> Warrior {
         
         
@@ -188,13 +188,13 @@ class Player {
         var pickedWarrior: Warrior?
         
         while pickedWarrior == nil {
-//            print()
-//            print("Player\(id) Choisi ton gurrier  d'attaque entre 1 et 3")
-//            print()
+            //            print()
+            //            print("Player\(id) Choisi ton gurrier  d'attaque entre 1 et 3")
+            //            print()
             opponent.describeWarriors()
             
             pickedWarrior = askPlayerToChooseWarrior(from: opponent.warriors)
-
+            
             
         }
         
@@ -209,7 +209,7 @@ class Player {
     
     
     func askPlayerToChooseWarrior(from warriors: [Warrior]) -> Warrior? {
-
+        
         guard let inputString = readLine() else {
             print("Erreur de liason avec terminal")
             return nil

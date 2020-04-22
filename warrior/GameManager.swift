@@ -74,9 +74,9 @@ class GameManager {
             for player in players {
                 guard let opponent = getOpponentFrom(player: player) else { return }
                 player.playTurn(opponent: opponent)
-//                if isGameOver {
-//                    break
-//                }
+                if isGameOver {
+                    break
+                }
             }
         }
     }
