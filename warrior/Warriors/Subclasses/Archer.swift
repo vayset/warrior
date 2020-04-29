@@ -11,7 +11,6 @@ import Foundation
 class Archer: Warrior {
     
     init(id: Int, name: String) {
-        super.init(id: id, name: name, healthPointsMax: 80, baseAttackPoints: 20, magicPoints: 10, weapon: Bow())
+        super.init(id: id, name: name, healthPointsMax: 90, baseAttackPoints: 20, magicPoints: 10, weapon: Bow())
     }
-
 }

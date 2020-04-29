@@ -8,11 +8,9 @@
 
 import Foundation
 
-
 class Hobbit: Warrior {
     
     init(id: Int, name: String) {
-        super.init(id: id, name: name, healthPointsMax: 120, baseAttackPoints: 20, magicPoints: 5, weapon: Dagger())
+        super.init(id: id, name: name, healthPointsMax: 150, baseAttackPoints: 30, magicPoints: 10, weapon: Dagger())
     }
-
 }

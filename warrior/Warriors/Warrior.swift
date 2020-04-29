@@ -10,23 +10,22 @@ import Foundation
 
 
 class Warrior {
-    let id: Int
-    let name: String
-    let healthPointsMax: Int
-    var healthPointsCurrent: Int
-    var weapon: Weapon
-    var magicPoints: Int
     
-    var baseAttackPoints: Int
+    // MARK: Static
     
-    var attack: Int {
-        weapon.attackPointsBonus + baseAttackPoints
-    }
+    static let selectableWarriors: [Warrior] = [
+        Mage(id: 1, name: "Mage"),
+        Knight(id: 2, name: "Knight"),
+        Archer(id: 3, name: "Archer"),
+        Hobbit(id: 4, name: "Gobbit"),
+        Cavalier(id: 5, name: "Cavalier"),
+        Werewolf(id: 6, name: "Werewolf")
+        
+    ]
     
-    var isAlive: Bool {
-        healthPointsCurrent > 0
-    }
+    // MARK: Init
     
+    /// Initialization of properties
     init(id: Int, name: String, healthPointsMax: Int, baseAttackPoints: Int, magicPoints: Int, weapon: Weapon) {
         self.id = id
         self.name = name
@@ -37,60 +36,23 @@ class Warrior {
         self.baseAttackPoints = baseAttackPoints
     }
     
-    func input() -> Int {
-        guard let inputLine = readLine() else {
-            print("Problème de liason avec terminal")
-            return input()
-        }
-        guard let inputInt = Int(inputLine) else {
-            print("Veuillez insérer un chiffre")
-            return input()
-        }
-        guard inputInt < 3 else {
-            print("Veuillez selectioner entre 1 et 2")
-            return input()
-        }
-        return inputInt
+    // MARK: - Internal
+    
+    // MARK: Properties - Internal
+    
+    let name: String
+    
+    /// A computed properties who tell us if the warriors and alive
+    var isAlive: Bool {
+        healthPointsCurrent > 0
     }
     
-
+    // MARK: Methods - Internal
     
-    func askIfWantToOpenChest(warrior: Warrior, chestIsBonus: Bool) {
-        
-        let shouldOpenChestInput = input()
-        
-        switch shouldOpenChestInput {
-            
-        case 1:
-            if chestIsBonus {
-                
-                //warrior.weapon = Weapon(weaponDammage: warrior.weapon.attackPointsBonus + Int.random(in: 10...20))
-                // ENLEVER LA LIGNE DAPRES et attribuer une nouvelle arme à la place au guerier
-                warrior.healthPointsCurrent -= attack + Int.random(in: 10...20)
-                print()
-                print("Congratulations it's a bonus !  👍")
-            } else {
-                
-                //warrior.weapon = Weapon(weaponDammage: warrior.weapon.attackPointsBonus - Int.random(in: 10...20))
-                // SAME HERE
-                warrior.healthPointsCurrent -= attack - Int.random(in: 10...20)
-                print()
-                print("It's a penalty ! Sorry 🙁")
-            }
-            
-            
-        case 2:
-            warrior.healthPointsCurrent -= attack
-        default: return
-        }
-        
-        
-    }
-    
-    
+    /// Method for attacking opponents
     func attack(victimWarrior: Warrior) {
-        print("Le guerrier \(name) attaque \(victimWarrior.name)")
-        let randomBonusNumber = Int.random(in: 1...6)
+        print("The warrior \(name) attack \(victimWarrior.name)")
+        let randomBonusNumber = Int.random(in: 1...15)
         
         if randomBonusNumber <= 2 {
             print()
@@ -104,9 +66,7 @@ class Warrior {
             print()
             
             let isBonus = randomBonusNumber == 1
-            askIfWantToOpenChest(warrior: victimWarrior, chestIsBonus: isBonus)
-        
-            
+            askIfWantToOpenChest(warrior: self, chestIsBonus: isBonus)
         }
         
         victimWarrior.healthPointsCurrent -= attack
@@ -115,14 +75,80 @@ class Warrior {
         if victimWarrior.healthPointsCurrent < 0 {
             victimWarrior.healthPointsCurrent = 0
         }
-        
-        print("Les points de vies de la victime et désormais \(victimWarrior.healthPointsCurrent)")
+        print()
+        print("The victim's life points are now \(victimWarrior.healthPointsCurrent) HP")
+        print()
         
     }
     
-    
+    /// methode Heal
     func heal(warrior: Warrior) {
         warrior.healthPointsCurrent += magicPoints
+    }
+    
+    func describe() {
+        print("\(id) \(type(of: self)) \(name) HP \(healthPointsCurrent)/\(healthPointsMax)")
+    }
+    
+    // MARK: - Private
+    
+    // MARK: Properties - Private
+    
+    private let id: Int
+    private let healthPointsMax: Int
+    private var healthPointsCurrent: Int
+    private var weapon: Weapon
+    private var magicPoints: Int
+    private var baseAttackPoints: Int
+    
+    /// A computed properties which adds damage from basic attack and weapon attack
+    private var attack: Int {
+        weapon.attackPointsBonus + baseAttackPoints
+    }
+    
+    // MARK: Methods - Private
+    
+    /// Method interact with user and retrieve input
+    private func input() -> Int {
+        guard let inputLine = readLine() else {
+            print("Terminal link error")
+            return input()
+        }
+        guard let inputInt = Int(inputLine) else {
+            print("Enter number please")
+            return input()
+        }
+        guard inputInt < 3 else {
+            print("A number between 1 and 3 please")
+            return input()
+        }
+        return inputInt
+    }
+    
+    /// Method which will ask if the user wants to open the bonus chest
+    private func askIfWantToOpenChest(warrior: Warrior, chestIsBonus: Bool) {
+        
+        let shouldOpenChestInput = input()
+        
+        switch shouldOpenChestInput {
+            
+        case 1:
+            if chestIsBonus {
+                
+                warrior.weapon = Weapon(weaponDammage: warrior.weapon.attackPointsBonus + Int.random(in: 10...20))
+                print()
+                print("Congratulations it's a bonus !  👍")
+            } else {
+                warrior.weapon = Weapon(weaponDammage: warrior.weapon.attackPointsBonus - Int.random(in: 10...20))
+                print()
+                print("It's a penalty ! Sorry 🙁")
+            }
+        case 2:
+            warrior.healthPointsCurrent -= attack
+        default: return
+        }
+        
+        
     }
     
     

@@ -9,8 +9,14 @@
 import Foundation
 
 class Weapon {
-    var attackPointsBonus: Int
     
+    // MARK: - Internal
+    
+    // MARK: Properties - Internal
+    
+    
+    var attackPointsBonus: Int
+    /// Initialization of properties
     init(weaponDammage: Int) {
         self.attackPointsBonus = weaponDammage
     }

@@ -11,7 +11,7 @@ import Foundation
 class Dirk: Weapon {
     
     init() {
-        super.init(weaponDammage: 15)
+        super.init(weaponDammage: 20)
     }
     
 }

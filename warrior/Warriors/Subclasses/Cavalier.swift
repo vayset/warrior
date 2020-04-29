@@ -10,7 +10,6 @@ import Foundation
 
 class Cavalier: Warrior {
     
-
     init(id: Int, name: String) {
         super.init(id: id, name: name, healthPointsMax: 250, baseAttackPoints: 20, magicPoints: 20, weapon: Spear())
     }

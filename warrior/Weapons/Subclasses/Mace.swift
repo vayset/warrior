@@ -11,7 +11,7 @@ import Foundation
 class Mace: Weapon {
     
     init() {
-        super.init(weaponDammage: 30)
+        super.init(weaponDammage: 40)
     }
     
 }
