@@ -14,15 +14,13 @@ class Warrior {
     // MARK: Static
     
     static let selectableWarriors: [Warrior] = [
-        Mage(id: 1, name: "Mage"),
-        Knight(id: 2, name: "Knight"),
-        Archer(id: 3, name: "Archer"),
-        Hobbit(id: 4, name: "Gobbit"),
-        Cavalier(id: 5, name: "Cavalier"),
-        Werewolf(id: 6, name: "Werewolf")
-        
+        Mage(id: 1, name: ""),
+        Knight(id: 2, name: ""),
+        Archer(id: 3, name: ""),
+        Hobbit(id: 4, name: ""),
+        Cavalier(id: 5, name: ""),
+        Werewolf(id: 6, name: "")
     ]
-    
     // MARK: Init
     
     /// Initialization of properties
@@ -41,6 +39,11 @@ class Warrior {
     // MARK: Properties - Internal
     
     let name: String
+    let healthPointsMax: Int
+    var healthPointsCurrent: Int
+    let id: Int
+    var descriptionString: String { "warrior" }
+
     
     /// A computed properties who tell us if the warriors and alive
     var isAlive: Bool {
@@ -52,7 +55,7 @@ class Warrior {
     /// Method for attacking opponents
     func attack(victimWarrior: Warrior) {
         print("The warrior \(name) attack \(victimWarrior.name)")
-        let randomBonusNumber = Int.random(in: 1...15)
+        let randomBonusNumber = Int.random(in: 1...6)
         
         if randomBonusNumber <= 2 {
             print()
@@ -84,19 +87,20 @@ class Warrior {
     /// methode Heal
     func heal(warrior: Warrior) {
         warrior.healthPointsCurrent += magicPoints
+        
+        if warrior.healthPointsCurrent > warrior.healthPointsMax {
+            warrior.healthPointsCurrent = warrior.healthPointsMax
+        }
     }
     
     func describe() {
-        print("\(id) \(type(of: self)) \(name) HP \(healthPointsCurrent)/\(healthPointsMax)")
+        print("\(id) \(descriptionString) \(name) ❤️ HP \(healthPointsCurrent)/\(healthPointsMax) ⚔️ AP \(attack)")
     }
     
     // MARK: - Private
     
     // MARK: Properties - Private
     
-    private let id: Int
-    private let healthPointsMax: Int
-    private var healthPointsCurrent: Int
     private var weapon: Weapon
     private var magicPoints: Int
     private var baseAttackPoints: Int

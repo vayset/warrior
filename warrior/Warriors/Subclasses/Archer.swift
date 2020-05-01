@@ -10,6 +10,8 @@ import Foundation
 
 class Archer: Warrior {
     
+    override var descriptionString: String {  "🏹 Archer 🏹" }
+    
     init(id: Int, name: String) {
         super.init(id: id, name: name, healthPointsMax: 90, baseAttackPoints: 20, magicPoints: 10, weapon: Bow())
     }

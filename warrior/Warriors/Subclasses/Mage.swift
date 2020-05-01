@@ -10,6 +10,9 @@ import Foundation
 
 class Mage: Warrior {
     
+    override var descriptionString: String {  "🧙‍♂️ Mage 🧙‍♂️" }
+
+    
     init(id: Int, name: String) {
         super.init(id: id, name: name, healthPointsMax: 120, baseAttackPoints: 10, magicPoints: 90, weapon: Dirk())
     }

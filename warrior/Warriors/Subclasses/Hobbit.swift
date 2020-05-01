@@ -10,6 +10,8 @@ import Foundation
 
 class Hobbit: Warrior {
     
+    override var descriptionString: String {  "👽 Hobbit 👽" }
+    
     init(id: Int, name: String) {
         super.init(id: id, name: name, healthPointsMax: 150, baseAttackPoints: 30, magicPoints: 10, weapon: Dagger())
     }

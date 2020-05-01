@@ -48,13 +48,12 @@ class Player {
         return false
     }
     
-    
     // MARK: Methods - Internal
     
     /// Method for defining an identifier for warriors
     func createWarriors(players: [Player]) {
         print()
-        print("Player \(id) it is your turn to pick your warriors !")
+        print("\(playerDescription) it is your turn to pick your warriors !")
         print()
         
         for warriorId in 1...numberOfWarriorPerTeam {
@@ -66,8 +65,10 @@ class Player {
     
     /// Method that manages player rounds
     func playTurn(opponent: Player) {
+
+        
         print()
-        print("Player \(id) Choose your attack warrior between 1 and 3")
+        print(" \(playerDescription) Choose your attack warrior between 1 and 3")
         print()
         let warriorMakingAction = pickWarrior(from: self)
         let warriorAction = askPlayerWarriorAction()
@@ -77,21 +78,7 @@ class Player {
         case .Heal: performHeal(warriorMakingAction: warriorMakingAction)
         }
         
-        
-        
-        //        warriorMakingAction.attack(warrior: victimWarrior)
-        
-        
-        // CHoisi un guerrier
-        
-        // En fonction du type (is) de guerrier perform une attack (guerrier lambda) ou un soin (mage)
-        
-        // Si c'est une attaque il faut choisir un guerrier de l'autre équipe (faire passer l'autre équipe en paramètre)
-        
-        // Si c'est un soin il faut choisir un autre guerrier de sa propre équipe
-        
     }
-    
     
     // MARK: - Private
     
@@ -101,6 +88,13 @@ class Player {
     
     private var warriors: [Warrior] = []
     
+    private var playerDescription: String {
+        switch id {
+        case 1: return "👨🏻‍✈️ Player 1️⃣"
+        case 2: return "👨🏻‍🚀 Player 2️⃣"
+        default: return "👨🏻‍✈️ Player \(id)"
+        }
+    }
     
     // MARK: Methods - Private
     
@@ -118,17 +112,11 @@ class Player {
             print()
             print("Select a class for your warrior by entering the corresponding integer (1-6):")
             print()
-            //            print("⚔️(1)Knight⚔️  HP: 200  BaseAttack: 30  WeaponAttack: 40  Magic points: 10")
             
             for selectableWarrior in Warrior.selectableWarriors {
                 selectableWarrior.describe()
             }
             
-            //            print("🏹(2)Archer🏹  HP: 90  BaseAttack: 20  WeaponAttack: 80HP  Magic points: 10")
-            //            print("👽(3)Hobbit👽  HP: 150  BaseAttack: 30  WeaponAttack: 20HP  Magic points: 10")
-            //            print("🐎(4)Cavalier🐎  HP: 250  BaseAttack: 20  WeaponAttack: 60HP  Magic points: 20")
-            //            print("🐺(5)Werewolf🐺  HP: 220  BaseAttack: 30  WeaponAttack: 40HP  Magic points: 30")
-            //            print("🧙‍♂️(6)Mage🧙‍♂️  HP: 120  BaseAttack: 10  WeaponAttack: 20HP  Magic points: 90")
             let warriorTypeIndex = getTerminalEntry()
             warriorSelected = getWarriorAccordingToTypeIndex(index: warriorTypeIndex, id: id, warriorName: warriorName)
         } while warriorSelected == nil
@@ -140,35 +128,38 @@ class Player {
         warriors.append(warrior)
     }
     
-    //    func printTest(factionDescription: String, healthPoints: Int, baseAttack: Int, weaponAttack: Int, magicPoints: Int) {
-    //        print("\(factionDescription)  HP: \(healthPoints)  BaseAttack: \(baseAttack) WeaponAttack: \(weaponAttack)  Magic points: \(magicPoints)")
-    //    }
-    
     /// Method for selecting a warrior with an idex
     private func getWarriorAccordingToTypeIndex(index: String, id: Int, warriorName: String) -> Warrior? {
         switch index {
         case "1":
-            return Knight(id: id, name: warriorName)
-        case "2":
-            return Archer(id: id, name: warriorName)
-        case "3":
-            return Hobbit(id: id, name: warriorName)
-        case "4":
-            return Cavalier(id: id, name: warriorName)
-        case "5":
-            return Werewolf(id: id, name: warriorName)
-        case "6":
             return Mage(id: id, name: warriorName)
+        case "2":
+            return Knight(id: id, name: warriorName)
+        case "3":
+            return Archer(id: id, name: warriorName)
+        case "4":
+            return Hobbit(id: id, name: warriorName)
+        case "5":
+            return Cavalier(id: id, name: warriorName)
+        case "6":
+            return Werewolf(id: id, name: warriorName)
         default:
             print("Error: input was not between 1 and 5, try again")
             return nil
             // TODO: Devrais demander à nouveau de rentrer un nomnbre puisque le nom
+            
         }
     }
     /// Method to retrieve the character string enter the terminal
     private func getTerminalEntry() -> String {
         
         guard let inputString = readLine() else {
+            print("Terminal error please try again")
+            return getTerminalEntry()
+        }
+        
+        guard !inputString.trimmingCharacters(in: .whitespaces).isEmpty else {
+            print("Empty input errror please try again")
             return getTerminalEntry()
         }
         
@@ -193,7 +184,7 @@ class Player {
     /// Method for retrieving characteristics of warriors
     private func describeWarriors() {
         for warrior in warriors {
-            warrior.describe()
+            print("\(warrior.id)   \(warrior.descriptionString) \(warrior.name) HP \(warrior.healthPointsCurrent)/\(warrior.healthPointsMax)")
         }
     }
     
@@ -247,22 +238,11 @@ class Player {
         var pickedWarrior: Warrior?
         
         while pickedWarrior == nil {
-            //            print()
-            //            print("Player\(id) Choisi ton gurrier  d'attaque entre 1 et 3")
-            //            print()
             opponent.describeWarriors()
-            
             pickedWarrior = askPlayerToChooseWarrior(from: opponent.warriors)
-            
-            
         }
         
         return pickedWarrior!
-        
-        //        return warrior!
-        // Print instruction
-        
-        // readline => déballer =>> convertir en Int(input) => déballer => vérifier que c'est biene ntre 1 et 3 => renvoyer guerrier en utilisant l'inoput en tant qu'index return warriors[input]
         
     }
     
