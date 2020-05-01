@@ -13,6 +13,6 @@ class Cavalier: Warrior {
     override var descriptionString: String {  "🐎 Cavalier 🐎" }
     
     init(id: Int, name: String) {
-        super.init(id: id, name: name, healthPointsMax: 250, baseAttackPoints: 20, magicPoints: 20, weapon: Spear())
+        super.init(id: id, name: name, healthPointsMax: 120, baseAttackPoints: 20, magicPoints: 20, weapon: Spear())
     }
 }

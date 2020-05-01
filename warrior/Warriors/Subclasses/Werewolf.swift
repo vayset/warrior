@@ -13,7 +13,7 @@ class Werewolf: Warrior {
     override var descriptionString: String {  "🐺 Werewolf 🐺" }
     
     init(id: Int, name: String) {
-        super.init(id: id, name: name, healthPointsMax: 220, baseAttackPoints: 30, magicPoints: 30, weapon: Mace())
+        super.init(id: id, name: name, healthPointsMax: 120, baseAttackPoints: 30, magicPoints: 30, weapon: Mace())
     }
     
     

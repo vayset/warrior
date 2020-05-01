@@ -14,7 +14,6 @@ class Weapon {
     
     // MARK: Properties - Internal
     
-    
     var attackPointsBonus: Int
     /// Initialization of properties
     init(weaponDammage: Int) {

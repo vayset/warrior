@@ -116,7 +116,9 @@ class GameManager {
     private func handleEndGame() {
         // TODO: Print stats and winner
         if let winner = winner {
-            print("The winner is player \(winner.id)")
+            
+            print("🎉🎉🎉 The winner is player \(winner.playerDescription) 🎉🎉🎉")
+            print()
         }
         print("Number of turns: \(turnCounter)")
     }

@@ -67,21 +67,19 @@ class Warrior {
             print()
             print("2: 🔒 No")
             print()
-            
+
             let isBonus = randomBonusNumber == 1
             askIfWantToOpenChest(warrior: self, chestIsBonus: isBonus)
         }
         
         victimWarrior.healthPointsCurrent -= attack
         
-        
         if victimWarrior.healthPointsCurrent < 0 {
             victimWarrior.healthPointsCurrent = 0
         }
         print()
-        print("The victim's life points are now \(victimWarrior.healthPointsCurrent) HP")
+        print("❤️❤️❤️ The victim's life points are now \(victimWarrior.healthPointsCurrent) HP ❤️❤️❤️")
         print()
-        
     }
     
     /// methode Heal

@@ -36,8 +36,15 @@ class Player {
         self.id = id
     }
     
-    /// computed properties to find out if the warrior is still in play
+     var playerDescription: String {
+        switch id {
+        case 1: return "👨🏻‍✈️ Player 1️⃣"
+        case 2: return "👨🏻‍🚀 Player 2️⃣"
+        default: return "👨🏻‍✈️ Player \(id)"
+        }
+    }
     
+    /// computed properties to find out if the warrior is still in play
     var isStillInGame: Bool {
         for warrior in warriors {
             if warrior.isAlive {
@@ -88,13 +95,7 @@ class Player {
     
     private var warriors: [Warrior] = []
     
-    private var playerDescription: String {
-        switch id {
-        case 1: return "👨🏻‍✈️ Player 1️⃣"
-        case 2: return "👨🏻‍🚀 Player 2️⃣"
-        default: return "👨🏻‍✈️ Player \(id)"
-        }
-    }
+
     
     // MARK: Methods - Private
     
@@ -102,9 +103,7 @@ class Player {
     /// Method for creating the warrior
     private func createWarrior(id: Int, players: [Player]) {
         
-        
         let warriorName = getWarriorName(players: players)
-        
         
         var warriorSelected: Warrior? = nil
         
@@ -144,7 +143,7 @@ class Player {
         case "6":
             return Werewolf(id: id, name: warriorName)
         default:
-            print("Error: input was not between 1 and 5, try again")
+            print("Error: input was not between 1 and 6, try again")
             return nil
             // TODO: Devrais demander à nouveau de rentrer un nomnbre puisque le nom
             
@@ -192,17 +191,17 @@ class Player {
     
     private func performAttack(opponent: Player, warriorMakingAction: Warrior) {
         print()
-        print("Choose the opposing warrior you would like to attack")
+        print("👉 Choose the opposing warrior you would like to attack 🗡")
         print()
         let victimWarrior = pickWarrior(from: opponent)
-        print("You chose \(victimWarrior.name) as a warrior victim")
+        print("You chose \(victimWarrior.name) as a warrior victim 👍")
         warriorMakingAction.attack(victimWarrior: victimWarrior)
     }
     
     /// Method for heal
     private func performHeal(warriorMakingAction: Warrior) {
         print()
-        print("Choose the warrior on your team you would like to heal")
+        print("Choose the warrior on your team you would like to heal 🩸")
         print()
         let healedWarrior = pickWarrior(from: self)
         print("You heal \(healedWarrior.name)")
@@ -214,8 +213,8 @@ class Player {
     private func askPlayerWarriorAction() -> WarriorAction {
         print()
         print("Choose an action")
-        print("1. Attack")
-        print("2. Heal")
+        print("1. Attack 🗡")
+        print("2. Heal 🩸")
         print()
         while true {
             
