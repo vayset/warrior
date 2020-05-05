@@ -43,7 +43,11 @@ class Warrior {
     var healthPointsCurrent: Int
     let id: Int
     var descriptionString: String { "warrior" }
-
+    
+    /// A computed properties which adds damage from basic attack and weapon attack
+     var attackPoints: Int {
+        weapon.attackPointsBonus + baseAttackPoints
+    }
     
     /// A computed properties who tell us if the warriors and alive
     var isAlive: Bool {
@@ -55,7 +59,7 @@ class Warrior {
     /// Method for attacking opponents
     func attack(victimWarrior: Warrior) {
         print("The warrior \(name) attack \(victimWarrior.name)")
-        let randomBonusNumber = Int.random(in: 1...6)
+        let randomBonusNumber = Int.random(in: 1...2)
         
         if randomBonusNumber <= 2 {
             print()
@@ -72,7 +76,7 @@ class Warrior {
             askIfWantToOpenChest(warrior: self, chestIsBonus: isBonus)
         }
         
-        victimWarrior.healthPointsCurrent -= attack
+        victimWarrior.healthPointsCurrent -= attackPoints
         
         if victimWarrior.healthPointsCurrent < 0 {
             victimWarrior.healthPointsCurrent = 0
@@ -92,7 +96,7 @@ class Warrior {
     }
     
     func describe() {
-        print("\(id) \(descriptionString) \(name) ❤️ HP \(healthPointsCurrent)/\(healthPointsMax) ⚔️ AP \(attack)")
+        print("\(id) \(descriptionString) \(name) ❤️ HP \(healthPointsCurrent)/\(healthPointsMax) 🗡 AP \(attackPoints) 🩸 MP \(magicPoints)")
     }
     
     // MARK: - Private
@@ -102,11 +106,7 @@ class Warrior {
     private var weapon: Weapon
     private var magicPoints: Int
     private var baseAttackPoints: Int
-    
-    /// A computed properties which adds damage from basic attack and weapon attack
-    private var attack: Int {
-        weapon.attackPointsBonus + baseAttackPoints
-    }
+
     
     // MARK: Methods - Private
     
@@ -131,22 +131,27 @@ class Warrior {
     private func askIfWantToOpenChest(warrior: Warrior, chestIsBonus: Bool) {
         
         let shouldOpenChestInput = input()
+        let randomNumber = Int.random(in: 10...20)
         
         switch shouldOpenChestInput {
             
         case 1:
             if chestIsBonus {
                 
-                warrior.weapon = Weapon(weaponDammage: warrior.weapon.attackPointsBonus + Int.random(in: 10...20))
+                warrior.weapon = Weapon(weaponDammage: warrior.weapon.attackPointsBonus + randomNumber)
                 print()
                 print("Congratulations it's a bonus !  👍")
+                print()
+                print("You have \(randomNumber) attack points additional 🎉")
             } else {
-                warrior.weapon = Weapon(weaponDammage: warrior.weapon.attackPointsBonus - Int.random(in: 10...20))
+                warrior.weapon = Weapon(weaponDammage: warrior.weapon.attackPointsBonus - randomNumber)
                 print()
                 print("It's a penalty ! Sorry 🙁")
+                print()
+                print("You have \(randomNumber) attack points less 😢")
             }
         case 2:
-            warrior.healthPointsCurrent -= attack
+            warrior.healthPointsCurrent -= attackPoints
         default: return
         }
         

@@ -183,7 +183,7 @@ class Player {
     /// Method for retrieving characteristics of warriors
     private func describeWarriors() {
         for warrior in warriors {
-            print("\(warrior.id)   \(warrior.descriptionString) \(warrior.name) HP \(warrior.healthPointsCurrent)/\(warrior.healthPointsMax)")
+            print("\(warrior.id)   \(warrior.descriptionString) \(warrior.name) HP \(warrior.healthPointsCurrent)/\(warrior.healthPointsMax)  🗡 AP \(warrior.attackPoints)")
         }
     }
     

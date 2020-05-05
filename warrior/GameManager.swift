@@ -121,5 +121,6 @@ class GameManager {
             print()
         }
         print("Number of turns: \(turnCounter)")
+        print()
     }
 }
