@@ -17,14 +17,12 @@ class GameManager {
     
     /// The startGame function contains 4 other functions as soon as we start automatically startGame it will apply the 4 classes it contains
     func startGame() {
+        printWelcomeInstructions()
         createPlayers()
         startTeamCreationPhase()
         startFightPhase()
         handleEndGame()
     }
-    
-    
-    
     
     // MARK: - Private
     
@@ -67,11 +65,23 @@ class GameManager {
     
     // MARK: Methods - Private
     
+    /// Method for printing welcome instructions
+    private func printWelcomeInstructions() {
+        print("===🗡 RPG Warrior 🗡===")
+        print()
+        print("Welcome dear players")
+        print()
+        print("LET THE GAME BEGIN")
+        
+    }
+    
     /// Method for creating players
     private func createPlayers() {
+        
         for playerId in 1...numberOfPlayer {
             createPlayer(id: playerId)
         }
+        
     }
     
     /// Method for adding the player to the players table by assigning it an identifier
@@ -88,6 +98,8 @@ class GameManager {
     
     /// Method to start the combat phase
     private func startFightPhase() {
+        printFightPhaseBeginInstructions()
+
         while !isGameOver {
             turnCounter += 1
             
@@ -99,6 +111,15 @@ class GameManager {
                 }
             }
         }
+    }
+    
+    /// Method for printing fight phase instructions
+    private func printFightPhaseBeginInstructions() {
+        print("===🗡 FIGHT PHASE 🗡===")
+        print()
+        print("Now that you've picked your team...")
+        print()
+        print("LET THE FIGHT BEGIN")
     }
     
     /// Method for defining an opponent
@@ -115,8 +136,13 @@ class GameManager {
     /// Method for defining the end of the game
     private func handleEndGame() {
         // TODO: Print stats and winner
+        
         if let winner = winner {
-            
+            for player in players {
+                print(player.playerDescription)
+                player.describeWarriors()
+                print()
+            }
             print("🎉🎉🎉 The winner is player \(winner.playerDescription) 🎉🎉🎉")
             print()
         }

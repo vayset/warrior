@@ -31,6 +31,7 @@ class Player {
     // MARK: Properties - Internal
     
     let id: Int
+    
     /// Initialization of propertie
     init(id: Int) {
         self.id = id
@@ -56,6 +57,13 @@ class Player {
     }
     
     // MARK: Methods - Internal
+    
+    /// Method for retrieving characteristics of warriors
+     func describeWarriors() {
+        for warrior in warriors {
+            print("\(warrior.id)   \(warrior.descriptionString) \(warrior.name) ❤️ HP \(warrior.healthPointsCurrent)/\(warrior.healthPointsMax)  🗡 AP \(warrior.attackPoints) 🩸 MP \(warrior.magicPoints)")
+        }
+    }
     
     /// Method for defining an identifier for warriors
     func createWarriors(players: [Player]) {
@@ -95,10 +103,7 @@ class Player {
     
     private var warriors: [Warrior] = []
     
-
-    
     // MARK: Methods - Private
-    
     
     /// Method for creating the warrior
     private func createWarrior(id: Int, players: [Player]) {
@@ -180,12 +185,6 @@ class Player {
         return warriorName
     }
     
-    /// Method for retrieving characteristics of warriors
-    private func describeWarriors() {
-        for warrior in warriors {
-            print("\(warrior.id)   \(warrior.descriptionString) \(warrior.name) HP \(warrior.healthPointsCurrent)/\(warrior.healthPointsMax)  🗡 AP \(warrior.attackPoints)")
-        }
-    }
     
     /// Method for attacking an opponent
     

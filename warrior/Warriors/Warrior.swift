@@ -40,12 +40,26 @@ class Warrior {
     
     let name: String
     let healthPointsMax: Int
-    var healthPointsCurrent: Int
+    var healthPointsCurrent: Int {
+        didSet {
+            if healthPointsCurrent <= 0 {
+                healthPointsCurrent = 0
+            }
+            
+            if healthPointsCurrent > healthPointsMax {
+                healthPointsCurrent = healthPointsMax
+            }
+        }
+    }
     let id: Int
+    var magicPoints: Int
     var descriptionString: String { "warrior" }
+    var hasFullHealthPoints: Bool {
+        healthPointsCurrent == healthPointsMax
+    }
     
     /// A computed properties which adds damage from basic attack and weapon attack
-     var attackPoints: Int {
+    var attackPoints: Int {
         weapon.attackPointsBonus + baseAttackPoints
     }
     
@@ -59,7 +73,7 @@ class Warrior {
     /// Method for attacking opponents
     func attack(victimWarrior: Warrior) {
         print("The warrior \(name) attack \(victimWarrior.name)")
-        let randomBonusNumber = Int.random(in: 1...2)
+        let randomBonusNumber = Int.random(in: 1...6)
         
         if randomBonusNumber <= 2 {
             print()
@@ -71,27 +85,24 @@ class Warrior {
             print()
             print("2: 🔒 No")
             print()
-
+            
             let isBonus = randomBonusNumber == 1
             askIfWantToOpenChest(warrior: self, chestIsBonus: isBonus)
         }
         
         victimWarrior.healthPointsCurrent -= attackPoints
         
-        if victimWarrior.healthPointsCurrent < 0 {
-            victimWarrior.healthPointsCurrent = 0
-        }
-        print()
-        print("❤️❤️❤️ The victim's life points are now \(victimWarrior.healthPointsCurrent) HP ❤️❤️❤️")
-        print()
+        
+        printCurrentHealthPoints(of: victimWarrior)
     }
     
     /// methode Heal
     func heal(warrior: Warrior) {
-        warrior.healthPointsCurrent += magicPoints
-        
-        if warrior.healthPointsCurrent > warrior.healthPointsMax {
-            warrior.healthPointsCurrent = warrior.healthPointsMax
+        if warrior.hasFullHealthPoints {
+            print("It was not really well played... the targeted warrior has already its maximum HP")
+        } else {
+            warrior.healthPointsCurrent += magicPoints
+            printCurrentHealthPoints(of: warrior)
         }
     }
     
@@ -104,11 +115,16 @@ class Warrior {
     // MARK: Properties - Private
     
     private var weapon: Weapon
-    private var magicPoints: Int
     private var baseAttackPoints: Int
-
     
     // MARK: Methods - Private
+    
+    /// Method which print the current health points of the warrior
+    private func printCurrentHealthPoints(of warrior: Warrior) {
+        print()
+        print("❤️❤️❤️ The victim's life points are now \(warrior.healthPointsCurrent) HP ❤️❤️❤️")
+        print()
+    }
     
     /// Method interact with user and retrieve input
     private func input() -> Int {
@@ -131,11 +147,12 @@ class Warrior {
     private func askIfWantToOpenChest(warrior: Warrior, chestIsBonus: Bool) {
         
         let shouldOpenChestInput = input()
-        let randomNumber = Int.random(in: 10...20)
         
         switch shouldOpenChestInput {
             
         case 1:
+            let randomNumber = Int.random(in: 10...20)
+            
             if chestIsBonus {
                 
                 warrior.weapon = Weapon(weaponDammage: warrior.weapon.attackPointsBonus + randomNumber)
@@ -151,7 +168,7 @@ class Warrior {
                 print("You have \(randomNumber) attack points less 😢")
             }
         case 2:
-            warrior.healthPointsCurrent -= attackPoints
+            print("You have decided to NOT open the chest")
         default: return
         }
         
